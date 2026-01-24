@@ -15,17 +15,25 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
-DB_PATH = os.path.join(INSTANCE_DIR, "app.db")
+
+
+def _instance_dir() -> str:
+    if os.environ.get("VERCEL") or os.environ.get("VERCEL_ENV"):
+        return os.path.join("/tmp", "instance")
+    return os.path.join(BASE_DIR, "instance")
+
+
+def _db_path() -> str:
+    return os.path.join(_instance_dir(), "app.db")
 
 
 def create_app() -> Flask:
-    os.makedirs(INSTANCE_DIR, exist_ok=True)
+    os.makedirs(_instance_dir(), exist_ok=True)
 
     app = Flask(__name__, instance_relative_config=True)
     app.config.update(
         SECRET_KEY=os.environ.get("FLASK_SECRET_KEY", "dev-secret-change-me"),
-        DATABASE=DB_PATH,
+        DATABASE=_db_path(),
     )
 
     @app.before_request
