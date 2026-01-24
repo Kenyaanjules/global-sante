@@ -101,6 +101,29 @@ body {
   color: var(--gs-nude-ink);
 }
 
+.gs-admin-auth {
+  background: radial-gradient(1000px 700px at 15% 10%, rgba(255, 247, 232, 0.95) 0%, transparent 58%),
+    radial-gradient(900px 680px at 85% 22%, rgba(201, 166, 143, 0.22) 0%, transparent 60%),
+    radial-gradient(900px 700px at 50% 92%, rgba(122, 75, 52, 0.10) 0%, transparent 62%),
+    linear-gradient(180deg, #fff7e8, #f6ecd9) !important;
+}
+
+.gs-admin-auth .gs-auth-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(27, 20, 17, 0.10);
+  box-shadow: 0 28px 70px rgba(27, 20, 17, 0.12);
+}
+
+.gs-admin-auth .gs-auth-login {
+  background: linear-gradient(135deg, var(--gs-nude-brown), var(--gs-nude-brown2));
+  color: #1b1411;
+}
+
+.gs-admin-auth .gs-auth-social {
+  background: #1b1411;
+  color: #fff;
+}
+
 .gs-auth-shell {
   min-height: 100vh;
   display: grid;

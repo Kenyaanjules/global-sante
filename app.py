@@ -96,10 +96,10 @@ def create_app() -> Flask:
     def admin_required():
         u = current_user()
         if not u:
-            return redirect(url_for("login", next=request.path))
+            return redirect(url_for("admin_login", next=request.path))
         if int(u["is_admin"]) != 1:
-            flash("Admin access required.", "danger")
-            return redirect(url_for("dashboard"))
+            flash("Admins only.", "danger")
+            return redirect(url_for("admin_login", next=request.path))
         return None
 
     @app.get("/")
@@ -154,6 +154,15 @@ def create_app() -> Flask:
         next_path = request.args.get("next")
         return render_template("login.html", next_path=next_path, user=None)
 
+    @app.get("/admin/login")
+    def admin_login():
+        init_db()
+        u = current_user()
+        if u and int(u["is_admin"]) == 1:
+            return redirect(url_for("admin"))
+        next_path = request.args.get("next")
+        return render_template("admin_login.html", next_path=next_path, user=None)
+
     @app.post("/login")
     def login_post():
         init_db()
@@ -171,6 +180,24 @@ def create_app() -> Flask:
         if next_path.startswith("/"):
             return redirect(next_path)
         return redirect(url_for("dashboard"))
+
+    @app.post("/admin/login")
+    def admin_login_post():
+        init_db()
+        email = (request.form.get("email") or "").strip().lower()
+        password = request.form.get("password") or ""
+        next_path = request.form.get("next_path") or ""
+
+        user = g.db.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+        if not user or int(user["is_admin"]) != 1 or not check_password_hash(user["password_hash"], password):
+            flash("Invalid admin credentials.", "danger")
+            return redirect(url_for("admin_login"))
+
+        session["user_id"] = user["id"]
+        flash("Welcome admin.", "success")
+        if next_path.startswith("/"):
+            return redirect(next_path)
+        return redirect(url_for("admin"))
 
     @app.post("/logout")
     def logout():
