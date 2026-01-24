@@ -17,6 +17,11 @@
           </div>
           <div class="d-flex gap-2">
             <a class="btn btn-sm btn-outline-dark" href="{{ url_for('admin') }}">Back</a>
+            <form method="post" action="{{ url_for('admin_toggle_admin', user_id=target['id']) }}">
+              <button class="btn btn-sm btn-outline-dark" type="submit">
+                {% if target['is_admin'] %}Remove Admin{% else %}Make Admin{% endif %}
+              </button>
+            </form>
             <form method="post" action="{{ url_for('admin_toggle_premium', user_id=target['id']) }}">
               <button class="btn btn-sm btn-gs-nude" type="submit">
                 {% if target['is_premium'] %}Remove Premium{% else %}Give Premium{% endif %}
@@ -37,6 +42,7 @@
                 <th>Stress</th>
                 <th>Sleep</th>
                 <th>Journal</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -47,11 +53,20 @@
                 <td>{{ e['stress'] }}</td>
                 <td>{{ e['sleep'] }}</td>
                 <td class="text-dark-emphasis" style="max-width: 520px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ e['journal'] }}</td>
+                <td class="text-end">
+                  <form
+                    method="post"
+                    action="{{ url_for('admin_delete_checkin', user_id=target['id'], checkin_id=e['id']) }}"
+                    onsubmit="return confirm('Delete this check-in?')"
+                  >
+                    <button class="btn btn-sm btn-outline-dark" type="submit">Delete</button>
+                  </form>
+                </td>
               </tr>
               {% endfor %}
               {% if checkins|length == 0 %}
               <tr>
-                <td colspan="5" class="text-secondary">No check-ins yet.</td>
+                <td colspan="6" class="text-secondary">No check-ins yet.</td>
               </tr>
               {% endif %}
             </tbody>

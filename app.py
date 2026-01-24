@@ -295,9 +295,22 @@ def create_app() -> Flask:
         if gate:
             return gate
 
-        users = g.db.execute(
-            "SELECT id, email, username, is_admin, is_premium, created_at FROM users ORDER BY created_at DESC"
-        ).fetchall()
+        q = (request.args.get("q") or "").strip()
+        if q:
+            like = f"%{q.lower()}%"
+            users = g.db.execute(
+                """
+                SELECT id, email, username, is_admin, is_premium, created_at
+                FROM users
+                WHERE lower(email) LIKE ? OR lower(username) LIKE ?
+                ORDER BY created_at DESC
+                """,
+                (like, like),
+            ).fetchall()
+        else:
+            users = g.db.execute(
+                "SELECT id, email, username, is_admin, is_premium, created_at FROM users ORDER BY created_at DESC"
+            ).fetchall()
 
         stats = g.db.execute(
             """
@@ -308,7 +321,7 @@ def create_app() -> Flask:
             """
         ).fetchone()
 
-        return render_template("admin.html", user=current_user(), users=users, stats=stats)
+        return render_template("admin.html", user=current_user(), users=users, stats=stats, q=q)
 
     @app.get("/admin/user/<int:user_id>")
     def admin_user(user_id: int):
@@ -345,6 +358,47 @@ def create_app() -> Flask:
         g.db.commit()
 
         flash("Premium status updated.", "success")
+        return redirect(url_for("admin_user", user_id=user_id))
+
+    @app.post("/admin/user/<int:user_id>/toggle-admin")
+    def admin_toggle_admin(user_id: int):
+        init_db()
+        gate = admin_required()
+        if gate:
+            return gate
+
+        me = current_user()
+        target = g.db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+        if not target:
+            flash("User not found.", "danger")
+            return redirect(url_for("admin"))
+
+        if int(target["is_admin"]) == 1:
+            admin_count = g.db.execute("SELECT COUNT(*) AS c FROM users WHERE is_admin = 1").fetchone()["c"]
+            if admin_count <= 1:
+                flash("You must keep at least one admin account.", "danger")
+                return redirect(url_for("admin_user", user_id=user_id))
+            if me and int(me["id"]) == int(target["id"]) and admin_count <= 1:
+                flash("You cannot remove admin from the last admin.", "danger")
+                return redirect(url_for("admin_user", user_id=user_id))
+
+        new_val = 0 if int(target["is_admin"]) == 1 else 1
+        g.db.execute("UPDATE users SET is_admin = ? WHERE id = ?", (new_val, user_id))
+        g.db.commit()
+
+        flash("Admin role updated.", "success")
+        return redirect(url_for("admin_user", user_id=user_id))
+
+    @app.post("/admin/user/<int:user_id>/checkin/<int:checkin_id>/delete")
+    def admin_delete_checkin(user_id: int, checkin_id: int):
+        init_db()
+        gate = admin_required()
+        if gate:
+            return gate
+
+        g.db.execute("DELETE FROM checkins WHERE id = ? AND user_id = ?", (checkin_id, user_id))
+        g.db.commit()
+        flash("Check-in deleted.", "success")
         return redirect(url_for("admin_user", user_id=user_id))
 
     return app
