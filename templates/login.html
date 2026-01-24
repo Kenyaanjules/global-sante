@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Login — Global Santé{% endblock %}
+
+{% block body_class %}gs-auth-body{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="gs-auth-shell">
+  <div class="gs-auth-card gs-auth-card-anim">
+    <div class="gs-auth-left">
+      <div>
+        <div class="gs-auth-title gs-auth-anim" style="--d: 0;">Welcome back!</div>
+        <div class="gs-auth-subtitle gs-auth-anim" style="--d: 1;">Daily check-ins, weekly trends, and a calmer space to reflect.</div>
+
+        <form class="mt-4" method="post" action="{{ url_for('login_post') }}">
+          <input type="hidden" name="next_path" value="{{ next_path or '' }}" />
+
+          <div class="mb-3 gs-auth-anim" style="--d: 2;">
+            <input class="form-control gs-auth-input" type="email" id="email" name="email" required placeholder="Email" />
+          </div>
+
+          <div class="mb-2 position-relative gs-auth-anim" style="--d: 3;">
+            <input
+              class="form-control gs-auth-input"
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Password"
+            />
+            <button class="gs-auth-eye" type="button" data-toggle-password="#password" aria-label="Toggle password">
+              👁
+            </button>
+          </div>
+
+          <div class="d-flex justify-content-end mb-3 gs-auth-anim" style="--d: 4;">
+            <a class="gs-auth-link" href="#" onclick="return false;">Forgot password</a>
+          </div>
+
+          <button class="btn gs-auth-login w-100 gs-auth-anim" style="--d: 5;" type="submit">Login</button>
+
+          <div class="gs-auth-divider gs-auth-anim" style="--d: 6;">or continue with</div>
+
+          <div class="d-flex justify-content-center gap-3 gs-auth-anim" style="--d: 7;">
+            <button class="gs-auth-social" type="button" aria-label="Continue with Google" onclick="return false;">G</button>
+            <button class="gs-auth-social" type="button" aria-label="Continue with Apple" onclick="return false;"></button>
+            <button class="gs-auth-social" type="button" aria-label="Continue with GitHub" onclick="return false;">⌂</button>
+          </div>
+
+          <div class="gs-auth-footer gs-auth-anim" style="--d: 8;">
+            Not a member?
+            <a class="gs-auth-link-strong" href="{{ url_for('register') }}">Register now</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="gs-auth-right gs-auth-right-anim">
+      <div class="gs-auth-illustration">
+        <img
+          src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1600&q=80"
+          alt="Calm wellbeing illustration"
+        />
+      </div>
+      <div class="gs-auth-right-text">Make your days easier and more organized with Global Santé</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sel = btn.getAttribute('data-toggle-password');
+        const input = document.querySelector(sel);
+        if (!input) return;
+        input.type = input.type === 'password' ? 'text' : 'password';
+      });
+    });
+  </script>
+{% endblock %}

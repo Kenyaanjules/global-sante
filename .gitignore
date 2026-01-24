@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.pwc
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env/
+
+# Flask / instance
+instance/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

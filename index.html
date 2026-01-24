@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Santé — Daily Check-In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">GS</div>
+          <div>
+            <h1>Global Santé</h1>
+            <p class="subtitle">Daily mental health check-in</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost" id="userBadge" type="button" disabled></button>
+          <button class="btn btn-ghost" id="exportBtn" type="button">Export</button>
+          <button class="btn btn-ghost" id="clearAllBtn" type="button">Clear all</button>
+          <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container grid">
+      <section class="card">
+        <div class="card-header">
+          <h2>How are you today?</h2>
+          <p class="muted" id="todayLine"></p>
+        </div>
+
+        <div class="quote" role="note" aria-label="Motivational quote">
+          <div class="quote-mark" aria-hidden="true">“</div>
+          <div>
+            <div class="quote-text" id="quoteText"></div>
+            <div class="quote-author" id="quoteAuthor"></div>
+          </div>
+        </div>
+
+        <form id="checkinForm" class="form" autocomplete="off">
+          <input type="hidden" id="editingId" value="" />
+
+          <div class="field">
+            <label for="date">Date</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+
+          <div class="field">
+            <label>Mood</label>
+            <div class="segmented" role="group" aria-label="Mood">
+              <input type="radio" id="mood1" name="mood" value="1" required />
+              <label for="mood1">1</label>
+              <input type="radio" id="mood2" name="mood" value="2" />
+              <label for="mood2">2</label>
+              <input type="radio" id="mood3" name="mood" value="3" />
+              <label for="mood3">3</label>
+              <input type="radio" id="mood4" name="mood" value="4" />
+              <label for="mood4">4</label>
+              <input type="radio" id="mood5" name="mood" value="5" />
+              <label for="mood5">5</label>
+            </div>
+            <div class="hint">1 = very low, 5 = great</div>
+          </div>
+
+          <div class="field">
+            <label for="stress">Stress (0–10)</label>
+            <div class="range-row">
+              <input id="stress" name="stress" type="range" min="0" max="10" step="1" value="5" />
+              <div class="pill" id="stressVal" aria-live="polite">5</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="sleep">Sleep quality (0–10)</label>
+            <div class="range-row">
+              <input id="sleep" name="sleep" type="range" min="0" max="10" step="1" value="5" />
+              <div class="pill" id="sleepVal" aria-live="polite">5</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="journal">Journal note (optional)</label>
+            <textarea
+              id="journal"
+              name="journal"
+              rows="5"
+              placeholder="What’s on your mind today?"
+            ></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" id="saveBtn" type="submit">Save check-in</button>
+            <button class="btn btn-ghost" id="cancelEditBtn" type="button" hidden>Cancel edit</button>
+          </div>
+
+          <div class="alert" id="formAlert" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Weekly trends</h2>
+          <p class="muted">Last 7 days (including today)</p>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="trendChart" height="140"></canvas>
+        </div>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="card span-2">
+        <div class="card-header history-header">
+          <div>
+            <h2>History</h2>
+            <p class="muted">Your saved check-ins</p>
+          </div>
+          <div class="history-controls">
+            <input id="search" class="search" type="search" placeholder="Search notes…" />
+          </div>
+        </div>
+
+        <div id="historyEmpty" class="empty" hidden>
+          No entries yet. Your first check-in will show up here.
+        </div>
+
+        <div id="historyList" class="history"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="muted">
+          Data is stored locally on this device (localStorage). Export if you want a backup.
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="confirmDialog" class="dialog">
+      <form method="dialog" class="dialog-inner">
+        <h3 id="confirmTitle">Confirm</h3>
+        <p class="muted" id="confirmText"></p>
+        <div class="dialog-actions">
+          <button class="btn btn-ghost" value="cancel">Cancel</button>
+          <button class="btn btn-danger" id="confirmOkBtn" value="ok">OK</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

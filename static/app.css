@@ -1,0 +1,343 @@
+:root {
+  --gs-bg0: #160b1a;
+  --gs-bg1: #130b22;
+  --gs-accent: #ff5fa2;
+  --gs-accent2: #caa7ff;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 800px at 18% 12%, #6a2b7a 0%, transparent 56%),
+    radial-gradient(900px 700px at 82% 18%, #3b2a7a 0%, transparent 56%),
+    radial-gradient(900px 700px at 50% 90%, #3b1f4f 0%, transparent 56%),
+    linear-gradient(180deg, var(--gs-bg0), var(--gs-bg1));
+  min-height: 100vh;
+}
+
+.gs-cream {
+  background: radial-gradient(1000px 700px at 15% 10%, rgba(255, 235, 200, 0.95) 0%, transparent 58%),
+    radial-gradient(900px 680px at 85% 22%, rgba(255, 248, 226, 0.92) 0%, transparent 60%),
+    radial-gradient(900px 700px at 50% 92%, rgba(255, 229, 214, 0.85) 0%, transparent 62%),
+    linear-gradient(180deg, #fff7e8, #f6ecd9) !important;
+}
+
+.gs-cream .gs-glass {
+  background: rgba(25, 10, 30, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.gs-glass {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+}
+
+.gs-hero {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.gs-hero img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.02);
+}
+
+.gs-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.5));
+}
+
+.gs-hero .gs-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: end;
+  padding: 1.25rem;
+  z-index: 1;
+}
+
+.gs-badge {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.btn-gs {
+  border: 0;
+  color: #2a0718;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gs-accent), var(--gs-accent2));
+}
+
+.btn-gs:hover {
+  filter: brightness(1.03);
+}
+
+.form-range::-webkit-slider-thumb {
+  background: var(--gs-accent);
+}
+
+.form-range::-moz-range-thumb {
+  background: var(--gs-accent);
+  border: none;
+}
+
+.gs-auth-body {
+  background: #eef0ef;
+  min-height: 100vh;
+  color: #111;
+}
+
+.gs-auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 14px;
+}
+
+.gs-auth-card {
+  width: min(980px, 100%);
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+}
+
+.gs-auth-left {
+  padding: 42px 44px;
+  display: grid;
+  align-items: center;
+}
+
+.gs-auth-title {
+  font-weight: 800;
+  font-size: 34px;
+  letter-spacing: -0.5px;
+  color: #111;
+}
+
+.gs-auth-subtitle {
+  margin-top: 8px;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 13px;
+}
+
+.gs-auth-input {
+  border-radius: 999px;
+  padding: 12px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f7f7f7;
+}
+
+.gs-auth-input:focus {
+  border-color: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.gs-auth-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  opacity: 0.55;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.gs-auth-eye:hover {
+  opacity: 0.8;
+}
+
+.gs-auth-link {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+  text-decoration: none;
+}
+
+.gs-auth-link:hover {
+  text-decoration: underline;
+}
+
+.gs-auth-login {
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 700;
+  background: #111;
+  color: #fff;
+}
+
+.gs-auth-login:hover {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+.gs-auth-divider {
+  margin: 16px 0 12px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+.gs-auth-social {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.gs-auth-social:hover {
+  filter: brightness(1.08);
+}
+
+.gs-auth-footer {
+  margin-top: 18px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
+
+.gs-auth-link-strong {
+  color: #111;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.gs-auth-link-strong:hover {
+  text-decoration: underline;
+}
+
+.gs-auth-right {
+  background: #eaf3ea;
+  padding: 30px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+}
+
+.gs-auth-illustration {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.gs-auth-illustration img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+
+.gs-auth-right-text {
+  margin-top: 18px;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 600;
+  text-align: center;
+}
+
+.gs-auth-card-anim {
+  animation: gsCardIn 700ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.gs-auth-anim {
+  --d: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: gsItemIn 600ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+  animation-delay: calc(var(--d) * 80ms + 120ms);
+}
+
+.gs-auth-right-anim .gs-auth-illustration {
+  animation: gsFloat 5.5s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+.gs-auth-social {
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.gs-auth-social:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.gs-auth-login {
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.gs-auth-login:hover {
+  transform: translateY(-1px);
+}
+
+.gs-auth-login:active {
+  transform: translateY(0px);
+}
+
+@keyframes gsCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gsItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gsFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-auth-card-anim,
+  .gs-auth-anim,
+  .gs-auth-right-anim .gs-auth-illustration {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 920px) {
+  .gs-auth-card {
+    grid-template-columns: 1fr;
+  }
+  .gs-auth-right {
+    display: none;
+  }
+  .gs-auth-left {
+    padding: 36px 22px;
+  }
+}
