@@ -22,9 +22,17 @@ function initRanges() {
 
 function initChart() {
   const el = document.getElementById("trendChart");
-  if (!el || !window.Chart || !window.GS_SERIES) return;
+  if (!el || !window.Chart) return;
 
-  const s = window.GS_SERIES;
+  const dataEl = document.getElementById("gs-series");
+  if (!dataEl) return;
+  let s;
+  try {
+    s = JSON.parse(dataEl.textContent || "null");
+  } catch {
+    return;
+  }
+  if (!s) return;
   const ctx = el.getContext("2d");
 
   new Chart(ctx, {

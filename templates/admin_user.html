@@ -2,34 +2,36 @@
 
 {% block title %}Admin — {{ target['email'] }}{% endblock %}
 
+{% block body_class %}gs-nude-body{% endblock %}
+
 {% block content %}
 <div class="row g-4">
   <div class="col-12">
-    <div class="card gs-glass border-0">
+    <div class="card gs-nude-card border-0 gs-dash-anim">
       <div class="card-body p-4">
         <div class="d-flex justify-content-between align-items-start">
           <div>
             <div class="h5 fw-bold mb-1">@{{ target['username'] }}</div>
-            <div class="text-white-75">{{ target['email'] }}</div>
-            <div class="text-white-50 mt-1" style="font-size: .9rem;">Created: {{ target['created_at'][:10] }}</div>
+            <div class="text-secondary">{{ target['email'] }}</div>
+            <div class="text-secondary mt-1" style="font-size: .9rem;">Created: {{ target['created_at'][:10] }}</div>
           </div>
           <div class="d-flex gap-2">
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('admin') }}">Back</a>
+            <a class="btn btn-sm btn-outline-dark" href="{{ url_for('admin') }}">Back</a>
             <form method="post" action="{{ url_for('admin_toggle_premium', user_id=target['id']) }}">
-              <button class="btn btn-sm btn-gs" type="submit">
+              <button class="btn btn-sm btn-gs-nude" type="submit">
                 {% if target['is_premium'] %}Remove Premium{% else %}Give Premium{% endif %}
               </button>
             </form>
           </div>
         </div>
 
-        <hr class="border-white border-opacity-10" />
+        <hr class="border-dark border-opacity-10" />
 
         <h2 class="h6 fw-bold">Recent check-ins</h2>
         <div class="table-responsive mt-2">
-          <table class="table table-dark table-borderless align-middle mb-0" style="--bs-table-bg: transparent;">
+          <table class="table table-borderless align-middle mb-0" style="--bs-table-bg: transparent;">
             <thead>
-              <tr class="text-white-50">
+              <tr class="text-secondary">
                 <th>Date</th>
                 <th>Mood</th>
                 <th>Stress</th>
@@ -44,12 +46,12 @@
                 <td>{{ e['mood'] }}</td>
                 <td>{{ e['stress'] }}</td>
                 <td>{{ e['sleep'] }}</td>
-                <td class="text-white-75" style="max-width: 520px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ e['journal'] }}</td>
+                <td class="text-dark-emphasis" style="max-width: 520px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ e['journal'] }}</td>
               </tr>
               {% endfor %}
               {% if checkins|length == 0 %}
               <tr>
-                <td colspan="5" class="text-white-50">No check-ins yet.</td>
+                <td colspan="5" class="text-secondary">No check-ins yet.</td>
               </tr>
               {% endif %}
             </tbody>

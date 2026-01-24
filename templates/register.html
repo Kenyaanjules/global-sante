@@ -2,57 +2,87 @@
 
 {% block title %}Register — Global Santé{% endblock %}
 
+{% block body_class %}gs-auth-body{% endblock %}
+
+{% block navbar %}{% endblock %}
+
 {% block content %}
-<div class="row g-4 align-items-stretch">
-  <div class="col-12 col-lg-7">
-    <div class="gs-hero gs-glass">
-      <img
-        src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1600&q=80"
-        alt="A person journaling"
-      />
-      <div class="gs-hero-content">
-        <div>
-          <div class="h3 fw-bold mb-1">Create your space</div>
-          <div class="text-white-75">Your entries are private to your account on this device.</div>
+<div class="gs-auth-shell">
+  <div class="gs-auth-card gs-auth-card-anim">
+    <div class="gs-auth-left">
+      <div>
+        <div class="gs-auth-title gs-auth-anim" style="--d: 0;">Create your account</div>
+        <div class="gs-auth-subtitle gs-auth-anim" style="--d: 1;">
+          Start tracking your mood, stress, sleep, and reflections.
         </div>
+
+        <form class="mt-4" method="post" action="{{ url_for('register_post') }}">
+          <div class="mb-3 gs-auth-anim" style="--d: 2;">
+            <input class="form-control gs-auth-input" type="email" id="email" name="email" required placeholder="Email" />
+          </div>
+
+          <div class="mb-3 gs-auth-anim" style="--d: 3;">
+            <input
+              class="form-control gs-auth-input"
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Username"
+            />
+          </div>
+
+          <div class="mb-3 position-relative gs-auth-anim" style="--d: 4;">
+            <input
+              class="form-control gs-auth-input"
+              type="password"
+              id="password"
+              name="password"
+              minlength="6"
+              required
+              placeholder="Password"
+            />
+            <button class="gs-auth-eye" type="button" data-toggle-password="#password" aria-label="Toggle password">
+              👁
+            </button>
+          </div>
+
+          <button class="btn gs-auth-login w-100 gs-auth-anim" style="--d: 5;" type="submit">Register</button>
+
+          <div class="gs-auth-footer gs-auth-anim" style="--d: 6;">
+            Already have an account?
+            <a class="gs-auth-link-strong" href="{{ url_for('login') }}">Sign in</a>
+          </div>
+
+          <div class="gs-auth-footer gs-auth-anim" style="--d: 7; opacity: 0.85;">
+            The first registered user becomes admin automatically.
+          </div>
+        </form>
       </div>
     </div>
-  </div>
 
-  <div class="col-12 col-lg-5">
-    <div class="card gs-glass border-0">
-      <div class="card-body p-4">
-        <h1 class="h4 fw-bold mb-3">Register</h1>
-
-        <form method="post" action="{{ url_for('register_post') }}">
-          <div class="mb-3">
-            <label class="form-label text-white" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" required />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-white" for="username">Username</label>
-            <input class="form-control" type="text" id="username" name="username" required />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-white" for="password">Password</label>
-            <input class="form-control" type="password" id="password" name="password" minlength="6" required />
-          </div>
-
-          <button class="btn btn-gs w-100" type="submit">Create account</button>
-        </form>
-
-        <div class="mt-3 text-white">
-          Already have an account?
-          <a class="link-light" href="{{ url_for('login') }}">Sign in</a>
-        </div>
-
-        <div class="mt-2 text-white-75" style="font-size: 0.9rem;">
-          The first registered user becomes admin automatically.
-        </div>
+    <div class="gs-auth-right gs-auth-right-anim">
+      <div class="gs-auth-illustration">
+        <img
+          src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1400&q=80"
+          alt="A calm journaling scene"
+        />
       </div>
+      <div class="gs-auth-right-text">A gentle space to check in with yourself</div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sel = btn.getAttribute('data-toggle-password');
+        const input = document.querySelector(sel);
+        if (!input) return;
+        input.type = input.type === 'password' ? 'text' : 'password';
+      });
+    });
+  </script>
 {% endblock %}
