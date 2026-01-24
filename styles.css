@@ -188,6 +188,57 @@ h1 {
   }
 }
 
+@media (max-width: 640px) {
+  .container {
+    width: min(1100px, calc(100% - 24px));
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .header-actions .btn {
+    padding: 9px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+
+  .grid {
+    padding: 16px 0 18px;
+    gap: 14px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card {
   border-radius: var(--radius);
   background: linear-gradient(180deg, var(--card), var(--card2));
