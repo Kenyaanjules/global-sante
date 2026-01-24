@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF3EA"/>
+      <stop offset="1" stop-color="#F7F2E6"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" rx="40" fill="url(#bg)"/>
+
+  <circle cx="260" cy="210" r="120" fill="#D9F0E0" filter="url(#soft)" opacity="0.9"/>
+  <circle cx="980" cy="260" r="150" fill="#E8F0FF" filter="url(#soft)" opacity="0.75"/>
+  <circle cx="700" cy="720" r="170" fill="#FFE7E1" filter="url(#soft)" opacity="0.75"/>
+
+  <path d="M360 340C430 250 540 210 600 210C660 210 770 250 840 340" stroke="#B7D7C0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M420 318C475 255 545 235 600 235C655 235 725 255 780 318" stroke="#C6E2CF" stroke-width="10" stroke-linecap="round"/>
+
+  <g transform="translate(380 300)">
+    <rect x="0" y="0" width="440" height="500" rx="40" fill="#F8FAF8" stroke="#DCE7DC" stroke-width="6"/>
+
+    <g transform="translate(170 40)">
+      <circle cx="50" cy="50" r="46" fill="#1E1E1E"/>
+      <circle cx="34" cy="48" r="6" fill="#FFFFFF"/>
+      <circle cx="68" cy="48" r="6" fill="#FFFFFF"/>
+      <path d="M38 68C47 78 60 78 70 68" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(88 150)">
+      <path d="M132 70C132 35 161 6 196 6C231 6 260 35 260 70V132C260 192 223 235 196 235C169 235 132 192 132 132V70Z" fill="#8CC8A0"/>
+      <path d="M196 120C176 100 153 104 140 116" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+      <path d="M196 120C216 100 239 104 252 116" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+      <path d="M196 170C180 170 168 156 168 138C168 132 174 128 180 132C186 136 190 140 196 140C202 140 206 136 212 132C218 128 224 132 224 138C224 156 212 170 196 170Z" fill="#FFFFFF" opacity="0.95"/>
+
+      <path d="M80 170C40 210 30 260 62 288" stroke="#8CC8A0" stroke-width="16" stroke-linecap="round"/>
+      <path d="M312 170C352 210 362 260 330 288" stroke="#8CC8A0" stroke-width="16" stroke-linecap="round"/>
+
+      <path d="M140 250C110 282 104 320 128 350C146 372 170 388 196 388C222 388 246 372 264 350C288 320 282 282 252 250" fill="#1E1E1E" opacity="0.08"/>
+      <path d="M124 318C156 292 232 292 268 318" stroke="#1E1E1E" stroke-opacity="0.18" stroke-width="10" stroke-linecap="round"/>
+
+      <path d="M86 338C116 310 156 300 196 300C236 300 276 310 306 338" stroke="#1E1E1E" stroke-opacity="0.22" stroke-width="12" stroke-linecap="round"/>
+      <path d="M110 352C132 336 162 328 196 328C230 328 260 336 282 352" stroke="#1E1E1E" stroke-opacity="0.18" stroke-width="10" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(72 420)">
+      <rect x="0" y="0" width="296" height="128" rx="22" fill="#FFFFFF" stroke="#E7E7E7" stroke-width="4"/>
+      <text x="18" y="42" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="26" fill="#111111" font-weight="700">Global Santé</text>
+      <text x="18" y="78" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="18" fill="#6B7280" font-weight="600">Daily check-ins</text>
+      <rect x="200" y="36" width="76" height="36" rx="18" fill="#8CC8A0"/>
+      <text x="220" y="60" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="18" fill="#0B1A12" font-weight="800">Pro</text>
+    </g>
+  </g>
+
+  <g transform="translate(150 610)">
+    <text x="0" y="0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="34" fill="#1F2937" font-weight="800">Make your day calmer</text>
+    <text x="0" y="46" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="22" fill="#4B5563" font-weight="600">Track mood, stress, sleep — and breathe.</text>
+  </g>
+</svg>
